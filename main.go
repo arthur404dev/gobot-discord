@@ -6,22 +6,16 @@ import (
 	"os/signal"
 	"syscall"
 
+	"github.com/arthur404dev/gobot-discord/config"
 	"github.com/bwmarrin/discordgo"
-	"github.com/joho/godotenv"
 )
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		fmt.Println("Error loading .env file, using system variables instead")
-	}
+	// Initialize the service Config
+	config.Init()
 
-	token := os.Getenv("BOT_TOKEN")
-	if token == "" {
-		fmt.Println("Error BOT_TOKEN not set")
-		return
-	}
-
+	// Create a new Discord Session
+	token := config.GetEnv().BOT_TOKEN
 	dg, err := discordgo.New("Bot " + token)
 	if err != nil {
 		fmt.Println("Error creating Discord Session: ", err)
