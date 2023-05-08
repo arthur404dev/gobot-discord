@@ -10,11 +10,14 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-var log = config.NewLogger("discord")
+var (
+	env = config.GetEnv()
+	log = config.NewLogger("discord")
+)
 
 func Init() {
 	// Create a new Discord Session
-	token := config.GetEnv().BOT_TOKEN
+	token := env.BOT_TOKEN
 	dg, err := discordgo.New("Bot " + token)
 	if err != nil {
 		log.Errorf("error creating discord session: %v", err)

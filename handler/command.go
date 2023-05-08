@@ -9,4 +9,5 @@ type CommandHandler interface {
 
 var CommandHandlers = []CommandHandler{
 	&PingHandler{},
+	&YesNoHandler{},
 }
